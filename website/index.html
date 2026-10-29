@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ApplyPilot — Job Application Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#dashboard"><span class="brand-mark">➤</span> ApplyPilot</a>
+    <nav aria-label="Main navigation">
+      <a class="nav-link active" href="#dashboard">▦ <span>Dashboard</span></a>
+      <a class="nav-link" href="#applications">☷ <span>Applications</span></a>
+      <a class="nav-link" href="#statistics">▥ <span>Statistics</span></a>
+    </nav>
+    <div class="sidebar-note"><span>✦</span><p>Your job search,<br />organized and on track.</p></div>
+  </aside>
+
+  <main class="main-content" id="dashboard">
+    <header class="topbar">
+      <div><span class="eyebrow">YOUR CAREER WORKSPACE</span><h1>Welcome to ApplyPilot</h1><p class="subtitle">Keep your applications organized and make your next move with confidence.</p></div>
+      <button class="primary-button" id="addTopButton">＋ Add application</button>
+    </header>
+
+    <section class="stats-grid" aria-label="Application summary">
+      <article class="stat-card total-card"><div class="stat-icon">▤</div><div><p>Total applications</p><strong id="totalCount">0</strong><small>All your opportunities</small></div></article>
+      <article class="stat-card applied-card"><div class="stat-icon">↗</div><div><p>Applied</p><strong id="appliedCount">0</strong><small>Waiting for a response</small></div></article>
+      <article class="stat-card interview-card"><div class="stat-icon">▣</div><div><p>Interviews</p><strong id="interviewCount">0</strong><small>Next steps in progress</small></div></article>
+      <article class="stat-card offer-card"><div class="stat-icon">★</div><div><p>Offers</p><strong id="offerCount">0</strong><small>Great progress</small></div></article>
+      <article class="stat-card rejected-card"><div class="stat-icon">×</div><div><p>Rejected</p><strong id="rejectedCount">0</strong><small>Keep moving forward</small></div></article>
+    </section>
+
+    <section class="panel" id="applications">
+      <div class="panel-heading"><div><h2>Your applications</h2><p class="muted">Track each opportunity from application to outcome.</p></div><button class="primary-button" id="addPanelButton">＋ Add application</button></div>
+      <div class="toolbar">
+        <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search company or position..." /></label>
+        <select id="statusFilter" aria-label="Filter by status"><option value="All">All statuses</option><option>Applied</option><option>Interview</option><option>Offer</option><option>Rejected</option></select>
+      </div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Company</th><th>Position</th><th>Status</th><th>Applied date</th><th>Actions</th></tr></thead><tbody id="applicationsBody"></tbody></table>
+      </div>
+      <div class="empty-state" id="emptyState"><div class="empty-icon">↗</div><h3>No applications yet</h3><p>Add your first job application to get started.</p><button class="primary-button" id="emptyAddButton">＋ Add your first application</button></div>
+      <div class="table-footer"><span id="resultCount">0 applications</span><button class="text-button" id="clearSearchButton">Clear search and filter</button></div>
+    </section>
+
+    <section class="bottom-grid" id="statistics">
+      <article class="panel progress-panel"><div class="panel-heading"><div><h2>Application overview</h2><p class="muted">A quick look at your current progress.</p></div></div><div id="statusBreakdown" class="breakdown"></div></article>
+      <article class="tip-card"><div class="tip-symbol">✦</div><div><h2>Small steps add up</h2><p>Tailor your resume, keep track of follow-ups, and celebrate every step forward.</p><ul><li>Review your applications weekly.</li><li>Prepare examples before interviews.</li><li>Keep learning between applications.</li></ul></div></article>
+    </section>
+    <footer>ApplyPilot <span>•</span> A personal project built with HTML, CSS, and JavaScript.</footer>
+  </main>
+
+  <dialog id="applicationDialog">
+    <form id="applicationForm">
+      <div class="dialog-heading"><div><span class="eyebrow">APPLICATION DETAILS</span><h2 id="dialogTitle">Add an application</h2></div><button type="button" class="close-button" id="closeDialog" aria-label="Close">×</button></div>
+      <input type="hidden" id="applicationId" />
+      <label>Company name<input id="companyInput" required maxlength="100" placeholder="e.g. Microsoft" /></label>
+      <label>Position<input id="positionInput" required maxlength="100" placeholder="e.g. Software Engineer Intern" /></label>
+      <div class="form-row"><label>Status<select id="applicationStatus"><option>Applied</option><option>Interview</option><option>Offer</option><option>Rejected</option></select></label><label>Applied date<input id="dateInput" type="date" required /></label></div>
+      <label>Notes <span class="optional">(optional)</span><textarea id="notesInput" rows="3" maxlength="1000" placeholder="Recruiter name, follow-up date, or notes..."></textarea></label>
+      <p class="form-error" id="formError" role="alert"></p>
+      <div class="dialog-actions"><button type="button" class="secondary-button" id="cancelDialog">Cancel</button><button type="submit" class="primary-button">Save application</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
